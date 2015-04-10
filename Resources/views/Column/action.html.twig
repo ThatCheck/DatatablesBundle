@@ -72,7 +72,7 @@
                 url += 'href="' + route + '" ';
                 url += attributes;
                 {% if action.confirm %}
-                    url += 'onclick="' + "return confirm('{{ action.ConfirmMessage }}')" + '" ';
+                    url += 'onclick="' + "return confirm('{{ action.ConfirmMessage}}')" + '" ';
                 {% endif %}
                 url += ">";
 

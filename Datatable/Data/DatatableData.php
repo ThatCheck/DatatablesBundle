@@ -174,7 +174,7 @@ class DatatableData implements DatatableDataInterface
     {
         if (in_array($column, $metadata->getFieldNames())) {
             $this->selectColumns[($columnTableName?:$metadata->getTableName())][] = $column;
-        } elseif (in_array($column, $this->getResponse())) {
+        } elseif (in_array($column, $this->response)) {
             throw new Exception("Exception when parsing the columns.");
         }
 
