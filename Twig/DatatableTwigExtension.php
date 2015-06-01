@@ -12,7 +12,9 @@
 namespace Sg\DatatablesBundle\Twig;
 
 use Sg\DatatablesBundle\Datatable\View\AbstractDatatableView;
+use Sg\DatatablesBundle\Datatable\Column\AbstractColumn;
 
+use Twig_Environment;
 use Twig_Extension;
 use Twig_SimpleFunction;
 use Twig_SimpleFilter;
@@ -31,7 +33,6 @@ class DatatableTwigExtension extends Twig_Extension
      */
     private $translator;
 
-
     //-------------------------------------------------
     // Ctor.
     //-------------------------------------------------
@@ -45,7 +46,6 @@ class DatatableTwigExtension extends Twig_Extension
     {
         $this->translator = $translator;
     }
-
 
     //-------------------------------------------------
     // Twig_ExtensionInterface
@@ -67,7 +67,9 @@ class DatatableTwigExtension extends Twig_Extension
         return array(
             new Twig_SimpleFunction("datatable_render", array($this, "datatableRender"), array("is_safe" => array("all"))),
             new Twig_SimpleFunction("datatable_render_html", array($this, "datatableRenderHtml"), array("is_safe" => array("all"))),
-            new Twig_SimpleFunction("datatable_render_js", array($this, "datatableRenderJs"), array("is_safe" => array("all")))
+            new Twig_SimpleFunction("datatable_render_js", array($this, "datatableRenderJs"), array("is_safe" => array("all"))),
+            new Twig_SimpleFunction("datatable_filter_render", array($this, "datatableFilterRender"), array("is_safe" => array("all"), "needs_environment" => true)),
+            new Twig_SimpleFunction("datatable_icon", array($this, "datatableIcon"), array("is_safe" => array("all")))
         );
     }
 
@@ -80,7 +82,6 @@ class DatatableTwigExtension extends Twig_Extension
             new Twig_SimpleFilter("length_join", array($this, "lengthJoin"))
         );
     }
-
 
     //-------------------------------------------------
     // Functions && Filters
@@ -125,7 +126,30 @@ class DatatableTwigExtension extends Twig_Extension
      */
     public function datatableRender(AbstractDatatableView $datatable)
     {
-        return $datatable->renderDatatableView();
+        return $datatable->render();
+    }
+
+    /**
+     * Renders the custom datatable filter.
+     *
+     * @param Twig_Environment      $twig
+     * @param AbstractDatatableView $datatable
+     * @param AbstractColumn        $column
+     * @param integer               $loopIndex
+     *
+     * @return mixed|string|void
+     */
+    public function datatableFilterRender(Twig_Environment $twig, AbstractDatatableView $datatable, AbstractColumn $column, $loopIndex)
+    {
+        $filterType = $column->getFilterType() ?: "text";
+
+        if ($filterProperty = $column->getFilterProperty()) {
+            $filterColumnId = $datatable->getColumnIdByColumnName($filterProperty);
+        } else {
+            $filterColumnId = $loopIndex;
+        }
+
+        return $twig->render('SgDatatablesBundle:Filters:filter_' . $filterType . '.html.twig', ['column' => $column, 'filterColumnId' => $filterColumnId]);
     }
 
     /**
@@ -138,7 +162,7 @@ class DatatableTwigExtension extends Twig_Extension
      */
     public function datatableRenderHtml(AbstractDatatableView $datatable)
     {
-        return $datatable->renderDatatableView('html');
+        return $datatable->render("html");
     }
 
     /**
@@ -151,6 +175,22 @@ class DatatableTwigExtension extends Twig_Extension
      */
     public function datatableRenderJs(AbstractDatatableView $datatable)
     {
-        return $datatable->renderDatatableView('js');
+        return $datatable->render("js");
+    }
+
+    /**
+     * Renders icon and label.
+     *
+     * @param string $icon
+     * @param string $label
+     *
+     * @return string
+     */
+    public function datatableIcon($icon, $label = "")
+    {
+        if ($icon)
+            return sprintf('<i class="%s"></i> %s', $icon, $label);
+        else
+            return $label;
     }
 }

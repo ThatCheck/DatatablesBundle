@@ -10,19 +10,23 @@ SgDatatablesBundle:Column:column.html.twig
 
 ### Options
 
-| Option     | Type           | Default |
-|------------|----------------|---------|
-| class      | string         | ""      |
-| padding    | string         | ""      |
-| name       | string         | ""      |
-| orderable  | boolean        | true    |
-| render     | null or string | null    |
-| searchable | boolean        | true    |
-| title      | string         | ""      |
-| type       | string         | ""      |
-| visible    | boolean        | true    |
-| width      | string         | ""      |
-| default    | string         | ""      |
+| Option          | Type           | Default |
+|-----------------|----------------|---------|
+| class           | string         | ""      |
+| padding         | string         | ""      |
+| name            | string         | ""      |
+| filter_type     | string         | "text"  |
+| filter_options  | array          | array() |
+| filter_property | string         | ""      |
+| orderable       | boolean        | true    |
+| render          | null or string | null    |
+| searchable      | boolean        | true    |
+| search_type     | string         | "like"  |
+| title           | string         | ""      |
+| type            | string         | ""      |
+| visible         | boolean        | true    |
+| width           | string         | ""      |
+| default         | string         | ""      |
 
 ### Example
 
@@ -59,20 +63,24 @@ SgDatatablesBundle:Column:column.html.twig
 
 ### Options
 
-| Option     | Type           | Default |          |
-|------------|----------------|---------|----------|
-| class      | string         | ""      |          |
-| padding    | string         | ""      |          |
-| name       | string         | ""      |          |
-| orderable  | boolean        | true    |          |
-| render     | null or string | null    |          |
-| searchable | boolean        | true    |          |
-| title      | string         | ""      |          |
-| type       | string         | ""      |          |
-| visible    | boolean        | true    |          |
-| width      | string         | ""      |          |
-| default    | string         | ""      |          |
-| data       | string         |         | required |
+| Option          | Type           | Default |          |
+|-----------------|----------------|---------|----------|
+| class           | string         | ""      |          |
+| padding         | string         | ""      |          |
+| name            | string         | ""      |          |
+| filter_type     | string         | "text"  |          |
+| filter_options  | array          | array() |          |
+| filter_property | string         | ""      |          |
+| orderable       | boolean        | true    |          |
+| render          | null or string | null    |          |
+| searchable      | boolean        | true    |          |
+| search_type     | string         | "like"  |          |
+| title           | string         | ""      |          |
+| type            | string         | ""      |          |
+| visible         | boolean        | true    |          |
+| width           | string         | ""      |          |
+| default         | string         | ""      |          |
+| data            | string         |         | required |
 
 ### Example
 
@@ -95,20 +103,7 @@ SgDatatablesBundle:Column:column.html.twig
 
 ### Options
 
-| Option     | Type           | Default |
-|------------|----------------|---------|
-| class      | string         | ""      |
-| padding    | string         | ""      |
-| name       | string         | ""      |
-| render     | null or string | null    |
-| title      | string         | ""      |
-| type       | string         | ""      |
-| visible    | boolean        | true    |
-| width      | string         | ""      |
-| default    | string         | ""      |
-| label      | string         | ""      |
-| attributes | array          | array() |
-| render_if  | array          | array() |
+see: Column
 
 ### Example
 
@@ -128,22 +123,26 @@ SgDatatablesBundle:Column:boolean.html.twig
 
 ### Options
 
-| Option      | Type           | Default          |
-|-------------|----------------|------------------|
-| class       | string         | ""               |
-| padding     | string         | ""               |
-| name        | string         | ""               |
-| orderable   | boolean        | true             |
-| render      | null or string | render_boolean   |
-| searchable  | boolean        | true             |
-| title       | string         | ""               |
-| type        | string         | ""               |
-| visible     | boolean        | true             |
-| width       | string         | ""               |
-| true_icon   | string         | ""               |
-| false_icon  | string         | ""               |
-| true_label  | string         | ""               |
-| false_label | string         | ""               |
+| Option          | Type           | Default                                  |
+|-----------------|----------------|------------------------------------------|
+| class           | string         | ""                                       |
+| padding         | string         | ""                                       |
+| name            | string         | ""                                       |
+| orderable       | boolean        | true                                     |
+| render          | null or string | render_boolean                           |
+| searchable      | boolean        | true                                     |
+| search_type     | string         | "like"                                   |
+| title           | string         | ""                                       |
+| type            | string         | ""                                       |
+| visible         | boolean        | true                                     |
+| width           | string         | ""                                       |
+| true_icon       | string         | ""                                       |
+| false_icon      | string         | ""                                       |
+| true_label      | string         | ""                                       |
+| false_label     | string         | ""                                       |
+| filter_type     | string         | "select"                                 |
+| filter_options  | array          | ["" => "Any", "1" => "Yes", "0" => "No"] |
+| filter_property | string         | ""                                       |
 
 ### Example
 
@@ -169,19 +168,23 @@ SgDatatablesBundle:Column:datetime.html.twig
 
 ### Options
 
-| Option      | Type           | Default           |
-|-------------|----------------|-------------------|
-| class       | string         | ""                |
-| padding     | string         | ""                |
-| name        | string         | ""                |
-| orderable   | boolean        | true              |
-| render      | null or string | render_datetime   |
-| searchable  | boolean        | true              |
-| title       | string         | ""                |
-| type        | string         | ""                |
-| visible     | boolean        | true              |
-| width       | string         | ""                |
-| date_format | string         | "lll"             |
+| Option          | Type           | Default         |
+|-----------------|----------------|-----------------|
+| class           | string         | ""              |
+| padding         | string         | ""              |
+| name            | string         | ""              |
+| orderable       | boolean        | true            |
+| render          | null or string | render_datetime |
+| searchable      | boolean        | true            |
+| search_type     | string         | "like"          |
+| title           | string         | ""              |
+| type            | string         | ""              |
+| visible         | boolean        | true            |
+| width           | string         | ""              |
+| date_format     | string         | "lll"           |
+| filter_type     | string         | "text"          |
+| filter_options  | array          | array()         |
+| filter_property | string         | ""              |
 
 ### Example
 
@@ -204,18 +207,22 @@ SgDatatablesBundle:Column:timeago.html.twig
 
 ### Options
 
-| Option      | Type           | Default         |
-|-------------|----------------|-----------------|
-| class       | string         | ""              |
-| padding     | string         | ""              |
-| name        | string         | ""              |
-| orderable   | boolean        | true            |
-| render      | null or string | render_timeago  |
-| searchable  | boolean        | true            |
-| title       | string         | ""              |
-| type        | string         | ""              |
-| visible     | boolean        | true            |
-| width       | string         | ""              |
+| Option          | Type           | Default         |
+|-----------------|----------------|-----------------|
+| class           | string         | ""              |
+| padding         | string         | ""              |
+| name            | string         | ""              |
+| orderable       | boolean        | true            |
+| render          | null or string | render_timeago  |
+| searchable      | boolean        | true            |
+| search_type     | string         | "like"          |
+| title           | string         | ""              |
+| type            | string         | ""              |
+| visible         | boolean        | true            |
+| width           | string         | ""              |
+| filter_type     | string         | "text"          |
+| filter_options  | array          | array()         |
+| filter_property | string         | ""              |
 
 ### Example
 
@@ -252,17 +259,17 @@ SgDatatablesBundle:Column:action.html.twig
 
 ### Action options
 
-| Option           | Type        | Default |
-|------------------|-------------|---------|
-| route            | string      | ""      |
-| route_parameters | array       | array() |
-| icon             | string      | ""      |
-| label            | string      | ""      |
-| confirm          | boolean     | false   |
-| confirm_message  | string      | ""      |
-| attributes       | array       | array() |
-| role             | string      | ""      |
-| renderif         | array       | array() |
+| Option           | Type        | Default |          |
+|------------------|-------------|---------|----------|
+| route            | string      |         | required |
+| route_parameters | array       | array() |          |
+| icon             | string      | ""      |          |
+| label            | string      | ""      |          |
+| confirm          | boolean     | false   |          |
+| confirm_message  | string      | ""      |          |
+| attributes       | array       | array() |          |
+| role             | string      | ""      |          |
+| render_if        | array       | array() |          |
 
 ### Example
 
@@ -288,7 +295,7 @@ $this->columnBuilder
                 "confirm" => true,
                 "confirm_message" => "Are you sure?",
                 "role" => "ROLE_ADMIN",
-                "renderif" => array(
+                "render_if" => array(
                     "enabled"
                 )
             ),
@@ -305,7 +312,7 @@ $this->columnBuilder
                     "role" => "button"
                 ),
                 "role" => "ROLE_USER",
-                "renderif" => array(
+                "render_if" => array(
                     "enabled"
                 )
             )
@@ -322,26 +329,31 @@ SgDatatablesBundle:Column:multiselect.html.twig
 
 ### Options
 
-| Option     | Type        | Default |
-|------------|-------------|---------|
-| class      | string      | ""      |
-| padding    | string      | ""      |
-| name       | string      | ""      |
-| type       | string      | ""      |
-| visible    | boolean     | true    |
-| width      | string      | ""      |
-| start_html | string      | ""      |
-| end_html   | string      | ""      |
-| actions    | array       | array() |
-| attributes | array       | array() |
+| Option     | Type        | Default |          |
+|------------|-------------|---------|----------|
+| class      | string      | ""      |          |
+| padding    | string      | ""      |          |
+| name       | string      | ""      |          |
+| title      | string      | ""      |          |
+| type       | string      | ""      |          |
+| visible    | boolean     | true    |          |
+| width      | string      | ""      |          |
+| start_html | string      | ""      |          |
+| end_html   | string      | ""      |          |
+| actions    | array       |         | required |
+| attributes | array       | array() |          |
+| value      | string      | "id"    |          |
 
-### Action options
+### Multiselect-Action options
 
-| Option           | Type        | Default |
-|------------------|-------------|---------|
-| route            | string      | ""      |
-| label            | string      | ""      |
-| role             | string      | ""      |
+| Option           | Type        | Default |          |
+|------------------|-------------|---------|----------|
+| icon             | string      | ""      |          |
+| route            | string      |         | required |
+| label            | string      | ""      |          |
+| role             | string      | ""      |          |
+| route_parameters | array       | array() |          |
+| attributes       | array       | array() |          |
 
 ### Example
 
@@ -358,11 +370,19 @@ $this->getColumnBuilder()
             array(
                 "route" => "post_bulk_delete",
                 "label" => "Delete",
-                "role" => "ROLE_ADMIN"
+                "role" => "ROLE_ADMIN",
+                "icon" => "fa fa-times",
+                "attributes" => array(
+                    "rel" => "tooltip",
+                    "title" => "Delete",
+                    "class" => "btn btn-primary btn-xs",
+                    "role" => "button"
+                ),
             ),
             array(
                 "route" => "post_bulk_disable",
-                "label" => "Disable"
+                "label" => "Disable",
+                "icon" => "fa fa-lock"
             )
         )
     ));

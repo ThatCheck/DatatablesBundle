@@ -53,7 +53,6 @@ class DatatableDataManager
      */
     private $parameterBag;
 
-
     //-------------------------------------------------
     // Ctor.
     //-------------------------------------------------
@@ -72,7 +71,6 @@ class DatatableDataManager
         $this->serializer = $serializer;
         $this->parameterBag = null;
     }
-
 
     //-------------------------------------------------
     // Public
@@ -110,8 +108,8 @@ class DatatableDataManager
          */
         $em = $this->doctrine->getManager();
 
-        $datatableQuery = new DatatableQuery($params, $metadata, $em);
-        $virtualColumns = $datatableView->getColumnBuilder()->getVirtualColumnNames();
+        $datatableQuery = new DatatableQuery($params, $metadata, $em, $datatableView);
+        $virtualColumns = $datatableView->getColumnBuilder()->getVirtualColumns();
         $datatableData = new DatatableData($params, $metadata, $em, $this->serializer, $datatableQuery, $virtualColumns);
         $datatableData->setLineFormatter($datatableView->getLineFormatter());
 

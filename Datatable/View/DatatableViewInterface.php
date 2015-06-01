@@ -11,6 +11,8 @@
 
 namespace Sg\DatatablesBundle\Datatable\View;
 
+use Sg\DatatablesBundle\Datatable\Column\ColumnBuilder;
+
 /**
  * Interface DatatableViewInterface
  *
@@ -29,24 +31,10 @@ interface DatatableViewInterface
      * @param string $type
      *
      * @return mixed
+     * @throws \Exception
+     * @throws \Twig_Error
      */
-    public function renderDatatableView($type = 'all');
-
-    /**
-     * Returns Entity.
-     *
-     * @return string
-     */
-    public function getEntity();
-
-    /**
-     * Set Ajax.
-     *
-     * @param Ajax $ajax
-     *
-     * @return $this
-     */
-    public function setAjax(Ajax $ajax);
+    public function render($type = "all");
 
     /**
      * Get Ajax.
@@ -56,12 +44,11 @@ interface DatatableViewInterface
     public function getAjax();
 
     /**
-     * Returns the name of this datatable view.
-     * Is used as jQuery datatable id selector.
+     * Get ColumnBuilder.
      *
-     * @return string
+     * @return ColumnBuilder
      */
-    public function getName();
+    public function getColumnBuilder();
 
     /**
      * Returns a callable that could transform the data line
@@ -69,4 +56,19 @@ interface DatatableViewInterface
      * @return callable
      */
     public function getLineFormatter();
+
+    /**
+     * Returns Entity.
+     *
+     * @return string
+     */
+    public function getEntity();
+
+    /**
+     * Returns the name of this datatable view.
+     * Is used as jQuery datatable id selector.
+     *
+     * @return string
+     */
+    public function getName();
 }

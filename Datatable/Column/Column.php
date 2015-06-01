@@ -28,7 +28,6 @@ class Column extends AbstractColumn
      */
     protected $default;
 
-
     //-------------------------------------------------
     // ColumnInterface
     //-------------------------------------------------
@@ -50,42 +49,6 @@ class Column extends AbstractColumn
     /**
      * {@inheritdoc}
      */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        $resolver->setDefaults(array(
-            "class" => "",
-            "padding" => "",
-            "name" => "",
-            "orderable" => true,
-            "render" => null,
-            "searchable" => true,
-            "title" => "",
-            "type" => "",
-            "visible" => true,
-            "width" => "",
-            "default" => ""
-        ));
-
-        $resolver->setAllowedTypes(array(
-            "class" => "string",
-            "padding" => "string",
-            "name" => "string",
-            "orderable" => "bool",
-            "render" => array("string", "null"),
-            "searchable" => "bool",
-            "title" => "string",
-            "type" => "string",
-            "visible" => "bool",
-            "width" => "string",
-            "default" => "string"
-        ));
-
-        return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public function getTemplate()
     {
         return "SgDatatablesBundle:Column:column.html.twig";
@@ -99,6 +62,58 @@ class Column extends AbstractColumn
         return "column";
     }
 
+    //-------------------------------------------------
+    // OptionsInterface
+    //-------------------------------------------------
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        $resolver->setDefaults(array(
+            "class" => "",
+            "padding" => "",
+            "name" => "",
+            "orderable" => true,
+            "render" => null,
+            "searchable" => true,
+            "title" => "",
+            "type" => "",
+            "visible" => true,
+            "width" => "",
+            "default" => "",
+            "search_type" => "like",
+            "filter_type" => "text",
+            "filter_options" => [],
+            "filter_property" => "",
+        ));
+
+        $resolver->setAllowedTypes(array(
+            "class" => "string",
+            "padding" => "string",
+            "name" => "string",
+            "orderable" => "bool",
+            "render" => array("string", "null"),
+            "searchable" => "bool",
+            "title" => "string",
+            "type" => "string",
+            "visible" => "bool",
+            "width" => "string",
+            "default" => "string",
+            "search_type" => "string",
+            "filter_type" => "string",
+            "filter_options" => "array",
+            "filter_property" => "string"
+        ));
+
+        $resolver->setAllowedValues("search_type", array("like", "notLike", "eq", "neq", "lt", "lte", "gt", "gte",
+            "in", "notIn", "isNull", "isNotNull"));
+
+        $resolver->setAllowedValues("filter_type", array("text", "select"));
+
+        return $this;
+    }
 
     //-------------------------------------------------
     // Getters && Setters

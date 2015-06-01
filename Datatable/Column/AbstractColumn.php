@@ -20,7 +20,7 @@ use Exception;
  *
  * @package Sg\DatatablesBundle\Datatable\Column
  */
-abstract class AbstractColumn implements ColumnInterface
+abstract class AbstractColumn implements ColumnInterface, OptionsInterface
 {
     /**
      * Column options.
@@ -132,6 +132,38 @@ abstract class AbstractColumn implements ColumnInterface
      */
     protected $width;
 
+    /**
+     * The search type (e.g. "like").
+     * Option: search_type
+     *
+     * @var string
+     */
+    protected $searchType;
+
+    /**
+     * The filter type name ("text" or "select).
+     * Option: filter_type
+     *
+     * @var string
+     */
+    protected $filterType;
+
+    /**
+     * Options for "select" filter type (e.g. "1" => "Yes", "0" => "No").
+     * Option: filter_options
+     *
+     * @var array
+     */
+    protected $filterOptions;
+
+    /**
+     * Filter property: Column name, on which the filter is applied,
+     * based on options for this column.
+     * Option: filter_property
+     *
+     * @var string
+     */
+    protected $filterProperty;
 
     //-------------------------------------------------
     // Ctor.
@@ -144,7 +176,6 @@ abstract class AbstractColumn implements ColumnInterface
     {
         $this->options = array();
     }
-
 
     //-------------------------------------------------
     // ColumnInterface
@@ -159,6 +190,10 @@ abstract class AbstractColumn implements ColumnInterface
 
         return $this;
     }
+
+    //-------------------------------------------------
+    // OptionsInterface
+    //-------------------------------------------------
 
     /**
      * {@inheritdoc}
@@ -194,7 +229,6 @@ abstract class AbstractColumn implements ColumnInterface
 
         return $this;
     }
-
 
     //-------------------------------------------------
     // Getters && Setters
@@ -486,5 +520,101 @@ abstract class AbstractColumn implements ColumnInterface
     public function getWidth()
     {
         return $this->width;
+    }
+
+    /**
+     * Set search type.
+     *
+     * @param string $searchType
+     *
+     * @return $this
+     */
+    public function setSearchType($searchType)
+    {
+        $this->searchType = $searchType;
+
+        return $this;
+    }
+
+    /**
+     * Get search type.
+     *
+     * @return string
+     */
+    public function getSearchType()
+    {
+        return $this->searchType;
+    }
+
+    /**
+     * Set filter type.
+     *
+     * @param string $filterType
+     *
+     * @return $this
+     */
+    public function setFilterType($filterType)
+    {
+        $this->filterType = $filterType;
+
+        return $this;
+    }
+
+    /**
+     * Get filter type.
+     *
+     * @return string
+     */
+    public function getFilterType()
+    {
+        return $this->filterType;
+    }
+
+    /**
+     * Set filter options.
+     *
+     * @param array $filterOptions
+     *
+     * @return $this
+     */
+    public function setFilterOptions(array $filterOptions)
+    {
+        $this->filterOptions = $filterOptions;
+
+        return $this;
+    }
+
+    /**
+     * Get filter options.
+     *
+     * @return array
+     */
+    public function getFilterOptions()
+    {
+        return $this->filterOptions;
+    }
+
+    /**
+     * Set filter property.
+     *
+     * @param string $filterProperty
+     *
+     * @return $this
+     */
+    public function setFilterProperty($filterProperty)
+    {
+        $this->filterProperty = $filterProperty;
+
+        return $this;
+    }
+
+    /**
+     * Get filter property.
+     *
+     * @return string
+     */
+    public function getFilterProperty()
+    {
+        return $this->filterProperty;
     }
 }

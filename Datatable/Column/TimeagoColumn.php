@@ -42,6 +42,26 @@ class TimeagoColumn extends AbstractColumn
     /**
      * {@inheritdoc}
      */
+    public function getTemplate()
+    {
+        return "SgDatatablesBundle:Column:timeago.html.twig";
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getAlias()
+    {
+        return "timeago";
+    }
+
+    //-------------------------------------------------
+    // OptionsInterface
+    //-------------------------------------------------
+
+    /**
+     * {@inheritdoc}
+     */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
@@ -54,7 +74,11 @@ class TimeagoColumn extends AbstractColumn
             "title" => "",
             "type" => "",
             "visible" => true,
-            "width" => ""
+            "width" => "",
+            "search_type" => "like",
+            "filter_type" => "text",
+            "filter_options" => [],
+            "filter_property" => "",
         ));
 
         $resolver->setAllowedTypes(array(
@@ -67,25 +91,18 @@ class TimeagoColumn extends AbstractColumn
             "title" => "string",
             "type" => "string",
             "visible" => "bool",
-            "width" => "string"
+            "width" => "string",
+            "search_type" => "string",
+            "filter_type" => "string",
+            "filter_options" => "array",
+            "filter_property" => "string"
         ));
 
+        $resolver->setAllowedValues("search_type", array("like", "notLike", "eq", "neq", "lt", "lte", "gt", "gte",
+            "in", "notIn", "isNull", "isNotNull"));
+
+        $resolver->setAllowedValues("filter_type", array("text", "select"));
+
         return $this;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getTemplate()
-    {
-        return "SgDatatablesBundle:Column:timeago.html.twig";
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getAlias()
-    {
-        return "timeago";
     }
 }

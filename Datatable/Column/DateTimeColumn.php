@@ -33,27 +33,9 @@ class DateTimeColumn extends TimeagoColumn
      */
     protected $dateFormat;
 
-
     //-------------------------------------------------
     // ColumnInterface
     //-------------------------------------------------
-
-    /**
-     * {@inheritdoc}
-     */
-    public function configureOptions(OptionsResolver $resolver)
-    {
-        parent::configureOptions($resolver);
-
-        $resolver->setDefault("render", "render_datetime");
-        $resolver->setDefault("date_format", "lll");
-
-        $resolver->addAllowedTypes(array(
-            "date_format" => "string",
-        ));
-
-        return $this;
-    }
 
     /**
      * {@inheritdoc}
@@ -71,6 +53,28 @@ class DateTimeColumn extends TimeagoColumn
         return "datetime";
     }
 
+    //-------------------------------------------------
+    // OptionsInterface
+    //-------------------------------------------------
+
+    /**
+     * {@inheritdoc}
+     */
+    public function configureOptions(OptionsResolver $resolver)
+    {
+        parent::configureOptions($resolver);
+
+        $resolver->setDefaults(array(
+            "render" => "render_datetime",
+            "date_format" => "lll",
+        ));
+
+        $resolver->addAllowedTypes(array(
+            "date_format" => "string",
+        ));
+
+        return $this;
+    }
 
     //-------------------------------------------------
     // Getters && Setters

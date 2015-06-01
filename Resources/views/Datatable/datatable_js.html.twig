@@ -38,13 +38,59 @@
                 var oTable = $(selector).DataTable(defaults);
             }
 
-            {% if view_individual_filtering %}
-                $("tfoot input.individual_filtering").on("keyup change", function() {
+            {% if view_options.individualFiltering %}
+
+                var html = '';
+
+                {# "head" and "both" position #}
+                {% if "head" == view_options.individualFilteringPosition or "both" == view_options.individualFilteringPosition %}
+                    var head = $(selector + "_wrapper").find("div.dataTables_scrollHeadInner table thead");
+
+                    $(head).append('<tr class="individual_filter_row"></tr>');
+                    head = $(head).find('tr.individual_filter_row');
+
+                    {% for column in view_columns %}
+                        {% if column.searchable %}
+                            html =  '<th>';
+                            html += '{{ datatable_filter_render(datatable, column, loop.index0)|escape('js') }}';
+                            html += '</th>';
+                        {% else %}
+                            html =  '<th>';
+                            html += '<input type="hidden" />';
+                            html += '</th>';
+                        {% endif %}
+                        $(head).append(html);
+
+                        {# init 3rd party libs #}
+                        var daterange = $('input[name="daterange"]');
+                        try {
+                            $(daterange).daterangepicker();
+                        } catch (e) {
+                            console.log(e.message);
+                        }
+
+                    {% endfor %}
+                {% endif %}
+
+                {# "foot" position -> datatable_html.html.twig #}
+
+                $(selector + "_wrapper").find("tr input.individual_filtering").on("keyup change", function() {
                     oTable
                         .column( $(this).parent().index()+':visible' )
                         .search( this.value )
                         .draw();
                 });
+
+                $("select.individual_filtering").on("keyup change", function(event) {
+                    var searchFieldId = $(event.currentTarget).data('filter-property-id');
+                    var searchValue = $(this).val();
+                    searchValue = searchValue ? searchValue.toString() : '';
+                    oTable
+                        .column(searchFieldId)
+                        .search(searchValue)
+                        .draw();
+                });
+
             {% endif %}
 
             {% if view_multiselect %}
