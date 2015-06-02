@@ -50,6 +50,18 @@ class Ajax
      */
     protected $type;
 
+    /**
+     * Custom params to add
+     * @var array
+     */
+    protected $customParams;
+
+    /**
+     * Make a condition to force reload data
+     * @var string
+     */
+    protected $reloadCondition;
+
     //-------------------------------------------------
     // Ctor.
     //-------------------------------------------------
@@ -95,12 +107,16 @@ class Ajax
     {
         $resolver->setDefaults(array(
             "url" => "",
-            "type" => "GET"
+            "type" => "GET",
+            "custom_params" => [],
+            "reload_condition" => ""
         ));
 
         $resolver->setAllowedTypes(array(
             "url" => "string",
-            "type" => "string"
+            "type" => "string",
+            "custom_params" => "array",
+            "reload_condition" => "string"
         ));
 
         $resolver->setAllowedValues('type', array("GET", "POST", "get", "post"));
@@ -184,4 +200,40 @@ class Ajax
     {
         return $this->type;
     }
+
+    /**
+     * @return array
+     */
+    public function getCustomParams()
+    {
+        return $this->customParams;
+    }
+
+    /**
+     * @param array $customParams
+     */
+    public function setCustomParams($customParams)
+    {
+        $this->customParams = $customParams;
+    }
+
+    /**
+     * @return string
+     */
+    public function getReloadCondition()
+    {
+        return $this->reloadCondition;
+    }
+
+    /**
+     * @param string $reloadCondition
+     */
+    public function setReloadCondition($reloadCondition)
+    {
+        $this->reloadCondition = $reloadCondition;
+    }
+
+
+
+
 }

@@ -36,6 +36,9 @@
                 #}
             } else {
                 var oTable = $(selector).DataTable(defaults);
+                {% if view_ajax.ReloadCondition %}
+                    {{ view_ajax.ReloadCondition|raw }}
+                {% endif %}
             }
 
             {% if view_options.individualFiltering %}
